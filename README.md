@@ -45,6 +45,8 @@ pages/workers  工人设置
 4. AppID 可先选择测试号或使用自己的小程序 AppID。
 5. 编译运行。
 
+详细搭建步骤见 [SETUP.md](SETUP.md)。
+
 ## 上传 GitHub
 
 如果已经创建 GitHub 空仓库，可以执行：
