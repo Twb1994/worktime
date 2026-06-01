@@ -1,0 +1,36 @@
+<view class="page">
+  <view class="title">工人设置</view>
+
+  <view class="card">
+    <view class="label">姓名</view>
+    <input class="input" value="{{form.name}}" placeholder="工人姓名" bindinput="onNameInput" />
+
+    <view class="label">固定每天工时</view>
+    <input class="input" type="digit" value="{{form.standardHours}}" placeholder="例如 8" bindinput="onStandardHoursInput" />
+
+    <view class="label">正常日工资</view>
+    <input class="input" type="digit" value="{{form.dayRate}}" placeholder="例如 300" bindinput="onDayRateInput" />
+
+    <view class="label">加班每小时工资</view>
+    <input class="input" type="digit" value="{{form.overtimeRate}}" placeholder="例如 40" bindinput="onOvertimeRateInput" />
+
+    <button class="btn" bindtap="saveWorker">{{editingId ? '保存修改' : '添加工人'}}</button>
+    <button wx:if="{{editingId}}" class="btn btn-light cancel-btn" bindtap="resetForm">取消修改</button>
+  </view>
+
+  <view wx:if="{{workers.length === 0}}" class="empty">还没有工人</view>
+
+  <view wx:for="{{workers}}" wx:key="id" class="card worker-card">
+    <view class="row">
+      <view>
+        <view class="worker-name">{{item.name}}</view>
+        <view class="muted">每天 {{item.standardHours}} 小时，日工资 ¥{{item.dayRate}}</view>
+        <view class="muted">加班 ¥{{item.overtimeRate}} / 小时</view>
+      </view>
+    </view>
+    <view class="worker-actions">
+      <button class="btn btn-light action-btn" data-id="{{item.id}}" bindtap="editWorker">编辑</button>
+      <button class="btn btn-danger action-btn" data-id="{{item.id}}" bindtap="deleteWorker">删除</button>
+    </view>
+  </view>
+</view>

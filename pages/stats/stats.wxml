@@ -1,0 +1,47 @@
+<view class="page">
+  <view class="title">工资统计</view>
+
+  <view class="card">
+    <view class="label">开始日期</view>
+    <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange">
+      <view class="input picker-text">{{startDate}}</view>
+    </picker>
+
+    <view class="label">结束日期</view>
+    <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange">
+      <view class="input picker-text">{{endDate}}</view>
+    </picker>
+  </view>
+
+  <view class="card">
+    <view class="muted">结算金额</view>
+    <view class="amount">¥{{summary.pay}}</view>
+    <view class="summary-grid">
+      <view>
+        <view class="summary-number">{{summary.normalHours}}</view>
+        <view class="muted">正常小时</view>
+      </view>
+      <view>
+        <view class="summary-number">{{summary.overtimeHours}}</view>
+        <view class="muted">加班小时</view>
+      </view>
+      <view>
+        <view class="summary-number">{{summary.count}}</view>
+        <view class="muted">记录数</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{workerStats.length > 0}}" class="card">
+    <view class="section-title">按工人统计</view>
+    <view wx:for="{{workerStats}}" wx:key="workerName" class="worker-stat">
+      <view class="row">
+        <view class="record-name">{{item.workerName}}</view>
+        <view class="record-pay">¥{{item.pay}}</view>
+      </view>
+      <view class="muted">正常 {{item.normalHours}} 小时，加班 {{item.overtimeHours}} 小时</view>
+    </view>
+  </view>
+
+  <view wx:if="{{workerStats.length === 0}}" class="empty">这个时间段还没有记录</view>
+</view>

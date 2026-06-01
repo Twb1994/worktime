@@ -1,0 +1,40 @@
+.picker-text {
+  line-height: 84rpx;
+}
+
+.summary-grid {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24rpx;
+}
+
+.summary-number {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-bottom: 16rpx;
+}
+
+.worker-stat {
+  border-top: 1rpx solid #eef2f7;
+  padding: 18rpx 0;
+}
+
+.worker-stat:first-of-type {
+  border-top: 0;
+}
+
+.record-name {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.record-pay {
+  color: #1677ff;
+  font-size: 34rpx;
+  font-weight: 700;
+}

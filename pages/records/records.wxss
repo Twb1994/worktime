@@ -1,0 +1,27 @@
+.record-card {
+  padding-bottom: 18rpx;
+}
+
+.record-name {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.record-pay {
+  color: #1677ff;
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.record-detail {
+  color: #374151;
+  font-size: 28rpx;
+  margin: 18rpx 0;
+}
+
+.small-btn {
+  font-size: 28rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  margin: 0;
+}

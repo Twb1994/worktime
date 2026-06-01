@@ -1,0 +1,14 @@
+.picker-text {
+  line-height: 84rpx;
+}
+
+.overtime-row {
+  margin-bottom: 22rpx;
+}
+
+.preview {
+  background: #f8fbff;
+  border-radius: 8rpx;
+  margin-bottom: 24rpx;
+  padding: 20rpx;
+}
