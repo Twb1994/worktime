@@ -18,3 +18,13 @@
 
 - 增加 `SETUP.md` 搭建使用说明。
 - README 增加搭建说明入口。
+
+## 2026-06-01 GitHub 仓库完善
+
+- 增加 Bug 反馈和功能建议 Issue 模板。
+- 增加 Pull Request 模板。
+- 增加 GitHub Actions 自动检查流程。
+- 增加 `SECURITY.md` 安全政策。
+- 增加 `CONTRIBUTING.md` 贡献说明。
+- 增加 `CODE_OF_CONDUCT.md` 行为准则。
+- 增加 Wiki 首页草稿 `docs/WIKI_HOME.md`。

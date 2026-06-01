@@ -64,6 +64,15 @@ git push -u origin main
 
 项目维护记录见 [MAINTENANCE.md](MAINTENANCE.md)。
 
+## GitHub 协作
+
+- 问题反馈：使用 GitHub Issues 模板提交 Bug 或功能建议。
+- 代码变更：使用 Pull Request 模板说明变更和验证方式。
+- 自动检查：GitHub Actions 会检查 JSON 配置和 JavaScript 语法。
+- 安全说明：见 [SECURITY.md](SECURITY.md)。
+- 贡献说明：见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+- Wiki 草稿：见 [docs/WIKI_HOME.md](docs/WIKI_HOME.md)。
+
 ## 后续可扩展
 
 - 增加数据备份和恢复
