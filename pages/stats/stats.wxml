@@ -2,6 +2,11 @@
   <view class="title">工资统计</view>
 
   <view class="card">
+    <view class="label">按月快速筛选</view>
+    <picker mode="date" fields="month" value="{{selectedMonth}}" bindchange="onMonthChange">
+      <view class="input picker-text">{{selectedMonth}}</view>
+    </picker>
+
     <view class="label">开始日期</view>
     <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange">
       <view class="input picker-text">{{startDate}}</view>
@@ -11,6 +16,8 @@
     <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange">
       <view class="input picker-text">{{endDate}}</view>
     </picker>
+
+    <button class="btn export-btn" bindtap="exportCsv">导出 CSV</button>
   </view>
 
   <view class="card">

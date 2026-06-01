@@ -31,7 +31,8 @@ Page({
       date: today(),
       normalHours: '8',
       hasOvertime: false,
-      overtimeHours: ''
+      overtimeHours: '',
+      remark: ''
     },
     previewPay: '0.00'
   },
@@ -80,6 +81,10 @@ Page({
     this.updatePreview()
   },
 
+  onRemarkInput(event) {
+    this.setData({ 'form.remark': event.detail.value })
+  },
+
   updatePreview() {
     const normalHours = toNumber(this.data.form.normalHours)
     const overtimeHours = this.data.form.hasOvertime ? toNumber(this.data.form.overtimeHours) : 0
@@ -113,9 +118,11 @@ Page({
       standardHours: worker.standardHours,
       dayRate: worker.dayRate,
       overtimeRate: worker.overtimeRate,
+      remark: this.data.form.remark.trim(),
       pay: Number(calcPay(worker, normalHours, overtimeHours))
     })
     wx.setStorageSync('records', records)
+    this.setData({ 'form.remark': '' })
     wx.showToast({ title: '已保存' })
   }
 })

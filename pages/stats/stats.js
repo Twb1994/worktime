@@ -6,9 +6,15 @@ const formatDate = (date) => {
 }
 
 const today = () => formatDate(new Date())
+const currentMonth = () => today().slice(0, 7)
 const monthStart = () => {
   const now = new Date()
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`
+}
+
+const monthEnd = (month) => {
+  const [year, monthNumber] = month.split('-').map(Number)
+  return formatDate(new Date(year, monthNumber, 0))
 }
 
 const emptySummary = () => ({
@@ -19,13 +25,16 @@ const emptySummary = () => ({
 })
 
 const toFixed = (number) => Number(number).toFixed(2)
+const csvCell = (value) => `"${String(value == null ? '' : value).replace(/"/g, '""')}"`
 
 Page({
   data: {
+    selectedMonth: currentMonth(),
     startDate: monthStart(),
     endDate: today(),
     summary: emptySummary(),
-    workerStats: []
+    workerStats: [],
+    filteredRecords: []
   },
 
   onShow() {
@@ -39,6 +48,16 @@ Page({
 
   onEndDateChange(event) {
     this.setData({ endDate: event.detail.value })
+    this.buildStats()
+  },
+
+  onMonthChange(event) {
+    const selectedMonth = event.detail.value
+    this.setData({
+      selectedMonth,
+      startDate: `${selectedMonth}-01`,
+      endDate: monthEnd(selectedMonth)
+    })
     this.buildStats()
   },
 
@@ -77,12 +96,56 @@ Page({
         overtimeHours: toFixed(total.overtimeHours),
         pay: toFixed(total.pay)
       },
+      filteredRecords: records,
       workerStats: Object.keys(byWorker).map((key) => ({
         workerName: byWorker[key].workerName,
         normalHours: toFixed(byWorker[key].normalHours),
         overtimeHours: toFixed(byWorker[key].overtimeHours),
         pay: toFixed(byWorker[key].pay)
       }))
+    })
+  },
+
+  exportCsv() {
+    if (this.data.filteredRecords.length === 0) {
+      wx.showToast({ title: '没有可导出的记录', icon: 'none' })
+      return
+    }
+
+    const header = ['日期', '工人', '正常工时', '加班小时', '固定每天工时', '日工资', '加班时薪', '工资', '备注']
+    const rows = this.data.filteredRecords.map((record) => [
+      record.date,
+      record.workerName,
+      record.normalHours,
+      record.overtimeHours,
+      record.standardHours,
+      record.dayRate,
+      record.overtimeRate,
+      record.pay,
+      record.remark || ''
+    ])
+    const csv = [header, ...rows].map((row) => row.map(csvCell).join(',')).join('\n')
+    const filePath = `${wx.env.USER_DATA_PATH}/worktime_${this.data.startDate}_${this.data.endDate}.csv`
+
+    wx.getFileSystemManager().writeFile({
+      filePath,
+      data: `\ufeff${csv}`,
+      encoding: 'utf8',
+      success: () => {
+        wx.setClipboardData({
+          data: filePath,
+          success: () => {
+            wx.showModal({
+              title: '导出成功',
+              content: 'CSV 文件路径已复制，可用 Excel 或 WPS 打开。',
+              showCancel: false
+            })
+          }
+        })
+      },
+      fail: () => {
+        wx.showToast({ title: '导出失败', icon: 'none' })
+      }
     })
   }
 })

@@ -12,3 +12,9 @@
   margin-bottom: 24rpx;
   padding: 20rpx;
 }
+
+.remark-input {
+  height: 140rpx;
+  line-height: 44rpx;
+  padding-top: 18rpx;
+}

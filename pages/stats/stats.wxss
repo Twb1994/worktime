@@ -38,3 +38,7 @@
   font-size: 34rpx;
   font-weight: 700;
 }
+
+.export-btn {
+  margin-top: 4rpx;
+}

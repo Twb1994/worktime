@@ -14,6 +14,7 @@
     <view class="record-detail">
       正常 {{item.normalHours}} 小时，加班 {{item.overtimeHours}} 小时
     </view>
+    <view wx:if="{{item.remark}}" class="record-remark">备注：{{item.remark}}</view>
     <button class="btn btn-danger small-btn" data-id="{{item.id}}" bindtap="deleteRecord">删除</button>
   </view>
 </view>

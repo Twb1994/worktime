@@ -19,6 +19,15 @@
   margin: 18rpx 0;
 }
 
+.record-remark {
+  background: #f9fafb;
+  border-radius: 8rpx;
+  color: #4b5563;
+  font-size: 26rpx;
+  margin-bottom: 18rpx;
+  padding: 14rpx;
+}
+
 .small-btn {
   font-size: 28rpx;
   height: 68rpx;

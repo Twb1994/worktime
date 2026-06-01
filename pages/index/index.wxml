@@ -28,6 +28,9 @@
       <input class="input" type="digit" value="{{form.overtimeHours}}" placeholder="例如 2" bindinput="onOvertimeHoursInput" />
     </block>
 
+    <view class="label">备注</view>
+    <textarea class="input remark-input" value="{{form.remark}}" placeholder="例如 工地名称、工作内容" bindinput="onRemarkInput" />
+
     <view class="preview">
       <view class="muted">预计工资</view>
       <view class="amount">¥{{previewPay}}</view>
