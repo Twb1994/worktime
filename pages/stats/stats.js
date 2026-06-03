@@ -1,3 +1,5 @@
+const { createWorkbook } = require('../../utils/xlsx')
+
 const formatDate = (date) => {
   const year = date.getFullYear()
   const month = String(date.getMonth() + 1).padStart(2, '0')
@@ -25,7 +27,6 @@ const emptySummary = () => ({
 })
 
 const toFixed = (number) => Number(number).toFixed(2)
-const csvCell = (value) => `"${String(value == null ? '' : value).replace(/"/g, '""')}"`
 
 Page({
   data: {
@@ -106,7 +107,7 @@ Page({
     })
   },
 
-  exportCsv() {
+  exportXlsx() {
     if (this.data.filteredRecords.length === 0) {
       wx.showToast({ title: '没有可导出的记录', icon: 'none' })
       return
@@ -124,20 +125,18 @@ Page({
       record.pay,
       record.remark || ''
     ])
-    const csv = [header, ...rows].map((row) => row.map(csvCell).join(',')).join('\n')
-    const filePath = `${wx.env.USER_DATA_PATH}/worktime_${this.data.startDate}_${this.data.endDate}.csv`
+    const filePath = `${wx.env.USER_DATA_PATH}/worktime_${this.data.startDate}_${this.data.endDate}.xlsx`
 
     wx.getFileSystemManager().writeFile({
       filePath,
-      data: `\ufeff${csv}`,
-      encoding: 'utf8',
+      data: createWorkbook([header, ...rows]),
       success: () => {
         wx.setClipboardData({
           data: filePath,
           success: () => {
             wx.showModal({
               title: '导出成功',
-              content: 'CSV 文件路径已复制，可用 Excel 或 WPS 打开。',
+              content: 'Excel 文件路径已复制，可用 Excel 或 WPS 打开。',
               showCancel: false
             })
           }

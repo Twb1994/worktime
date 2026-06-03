@@ -28,3 +28,11 @@
 - 增加 `CONTRIBUTING.md` 贡献说明。
 - 增加 `CODE_OF_CONDUCT.md` 行为准则。
 - 增加 Wiki 首页草稿 `docs/WIKI_HOME.md`。
+
+## 2026-06-03 功能完善
+
+- 统计页导出从 CSV 升级为真正的 `.xlsx` 文件。
+- 新增 `utils/xlsx.js`，在小程序本地生成 Excel 工作簿。
+- 历史记录页增加记录编辑功能。
+- 自动检查流程增加 `utils` 目录脚本语法检查。
+- README 和搭建说明同步更新。

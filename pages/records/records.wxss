@@ -2,6 +2,16 @@
   padding-bottom: 18rpx;
 }
 
+.picker-text {
+  line-height: 84rpx;
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-bottom: 16rpx;
+}
+
 .record-name {
   font-size: 34rpx;
   font-weight: 700;
@@ -28,7 +38,19 @@
   padding: 14rpx;
 }
 
-.small-btn {
+.remark-input {
+  height: 140rpx;
+  line-height: 44rpx;
+  padding-top: 18rpx;
+}
+
+.record-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.action-btn {
+  flex: 1;
   font-size: 28rpx;
   height: 68rpx;
   line-height: 68rpx;

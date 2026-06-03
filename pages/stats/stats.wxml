@@ -17,7 +17,7 @@
       <view class="input picker-text">{{endDate}}</view>
     </picker>
 
-    <button class="btn export-btn" bindtap="exportCsv">导出 CSV</button>
+    <button class="btn export-btn" bindtap="exportXlsx">导出 Excel</button>
   </view>
 
   <view class="card">
