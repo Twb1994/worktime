@@ -2,6 +2,10 @@
   padding-bottom: 18rpx;
 }
 
+.search-card {
+  padding-bottom: 18rpx;
+}
+
 .picker-text {
   line-height: 84rpx;
 }
@@ -47,6 +51,13 @@
 .record-actions {
   display: flex;
   gap: 16rpx;
+}
+
+.clear-btn {
+  font-size: 28rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  margin: 0;
 }
 
 .action-btn {

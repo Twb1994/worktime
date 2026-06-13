@@ -126,24 +126,47 @@ Page({
       record.remark || ''
     ])
     const filePath = `${wx.env.USER_DATA_PATH}/worktime_${this.data.startDate}_${this.data.endDate}.xlsx`
+    const fileName = `worktime_${this.data.startDate}_${this.data.endDate}.xlsx`
 
     wx.getFileSystemManager().writeFile({
       filePath,
       data: createWorkbook([header, ...rows]),
       success: () => {
-        wx.setClipboardData({
-          data: filePath,
-          success: () => {
-            wx.showModal({
-              title: '导出成功',
-              content: 'Excel 文件路径已复制，可用 Excel 或 WPS 打开。',
-              showCancel: false
-            })
-          }
-        })
+        this.shareExportFile(filePath, fileName)
       },
       fail: () => {
         wx.showToast({ title: '导出失败', icon: 'none' })
+      }
+    })
+  },
+
+  shareExportFile(filePath, fileName) {
+    if (typeof wx.shareFileMessage !== 'function') {
+      this.copyExportPath(filePath, '当前环境不支持直接分享，文件路径已复制。')
+      return
+    }
+
+    wx.shareFileMessage({
+      filePath,
+      fileName,
+      success: () => {
+        wx.showToast({ title: '已打开分享' })
+      },
+      fail: () => {
+        this.copyExportPath(filePath, '分享未完成，文件路径已复制。')
+      }
+    })
+  },
+
+  copyExportPath(filePath, content) {
+    wx.setClipboardData({
+      data: filePath,
+      success: () => {
+        wx.showModal({
+          title: '导出成功',
+          content,
+          showCancel: false
+        })
       }
     })
   }

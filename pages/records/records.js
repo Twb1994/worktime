@@ -20,7 +20,9 @@ const blankForm = () => ({
 
 Page({
   data: {
+    allRecords: [],
     records: [],
+    searchQuery: '',
     editingId: '',
     editForm: blankForm()
   },
@@ -30,14 +32,46 @@ Page({
   },
 
   loadRecords() {
+    const allRecords = wx.getStorageSync('records') || []
     this.setData({
-      records: wx.getStorageSync('records') || []
+      allRecords,
+      records: this.filterRecords(allRecords, this.data.searchQuery)
+    })
+  },
+
+  filterRecords(records, query) {
+    const keyword = query.trim().toLowerCase()
+    if (!keyword) return records
+    return records.filter((record) => {
+      return [
+        record.date,
+        record.workerName,
+        record.normalHours,
+        record.overtimeHours,
+        record.pay,
+        record.remark
+      ].some((value) => String(value == null ? '' : value).toLowerCase().includes(keyword))
+    })
+  },
+
+  onSearchInput(event) {
+    const searchQuery = event.detail.value
+    this.setData({
+      searchQuery,
+      records: this.filterRecords(this.data.allRecords, searchQuery)
+    })
+  },
+
+  clearSearch() {
+    this.setData({
+      searchQuery: '',
+      records: this.data.allRecords
     })
   },
 
   editRecord(event) {
     const id = event.currentTarget.dataset.id
-    const record = this.data.records.find((item) => item.id === id)
+    const record = this.data.allRecords.find((item) => item.id === id)
     if (!record) return
     this.setData({
       editingId: id,
